@@ -1,0 +1,715 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+    <meta name="viewport" id="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css">
+    <link href='http://fonts.googleapis.com/css?family=Abel' rel='stylesheet'>
+
+    <style>
+        body {
+            font-family: 'Abel' !important;
+        }
+
+        .ui-page {
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0;
+            overflow-y: hidden;
+            background-color: white;
+        }
+
+        .ui-content {
+            padding: 0px;
+            height: inherit;
+            width: inherit;
+        }
+
+        .ui-bar-c {
+            background: white;
+        }
+
+        .ui-btn-c {
+            width: 20px;
+            height: 10px;
+            color: black;
+            margin-left: 10px;
+        }
+
+        .mom {
+            display: block;
+        }
+
+        .child {
+            position: absolute;
+            top: 0px;
+            bottom: 0px;
+            margin: auto;
+        }
+
+        #header {
+            background-image: url("./img/wo-header-bg.jpg");
+            background-repeat: repeat-x;
+            background-position: bottom;
+            position: absolute;
+            padding-left: 3.5%;
+            padding-right: 3.5%;
+            width: 100%;
+            height: 10%;
+            z-index: 998;
+            box-sizing: border-box;
+        }
+
+        #searchbutton {
+            width: 7%;
+            height: 100%;
+            margin-top: 3%;
+            background-image: url("./img/search.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 80%;
+            right: 3%;
+        }
+
+
+        input[type=text] {
+           font-family: 'Abel';
+            width: 320px;
+            box-sizing: border-box;
+            border: 2px white;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: left;
+            background-color: white;
+            margin-top: 10%;
+            margin-left: 9%;
+
+        }
+
+        #date {
+            margin-top: 10%;
+            margin-left: 37%;
+            text-align: center;
+        }
+
+        #topmenu {
+            height: 100%;
+            width: 7%;
+            margin-top: 3%;
+            cursor: pointer;
+            border-radius: 50%;
+            background-image: url("./img/wo-profile.png");
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: 80%;
+            left: 3%;
+        }
+
+        #footer {
+            background: url("./img/wo-bar.jpg");
+            background-position: bottom;
+            background-size: 100% 200%;
+            height: 12%;
+            width: 65%;
+            margin-left: 17%;
+            z-index: 998;
+            position: absolute;
+            bottom: 7%;
+        }
+
+        .p-content {
+            margin-top: 22%;
+            width: 100%;
+            height: 75%;
+        }
+        #mycontent{
+           text-align: justify;
+           margin-top: 18%;
+           width: 85%;
+           margin-left: 7.5%;
+           margin-right: 7.5%;
+           overflow: scroll;
+        }
+        #contentTitle{
+          font-weight: bold;
+          font-size: 140%;
+          padding-top: 2px;
+          margin-bottom: 6px;
+        }
+
+        #contentDescription{
+          font-weight: bold;
+          margin-bottom: 0px;
+          margin-top: 2px;
+        }
+
+        .wo-pic {
+            /*margin-left: 5%;*/
+            height: 60.7%;
+            width: auto;
+            margin-left: 6.5%;
+            margin-right: 4.5%;
+        }
+
+        #p1-pic {
+            background: url("./img/wo-p2-01.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #p2-pic {
+            background: url("./img/wo-p1-01.jpg");
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .wo-profile {
+            width: 80%;
+            height: 80%;
+        }
+
+        .wo-title1 {
+            margin-left: 6.5%;
+            margin-right: 4.5%;
+            margin-top: 6%;
+            font-size: 24px;
+            text-align: center;
+            font-style: bold;
+            /*font-family: 'font-family: "HelveticaNeue-CondensedBold", "HelveticaNeueBoldCondensed", "HelveticaNeue-Bold-Condensed", "Helvetica Neue Bold Condensed", "HelveticaNeueBold", "HelveticaNeue-Bold", "Helvetica Neue Bold", "HelveticaNeue", "Helvetica Neue", 'TeXGyreHerosCnBold', "Helvetica", "Tahoma", "Geneva", "Arial Narrow", "Arial", sans-serif; font-weight:600; font-stretch:condensed;';*/
+        }
+
+        .wo-title2 {
+            margin-left: 9%;
+            margin-right: 9%;
+            margin-top: 2.4%;
+            font-size: 16px;
+            text-align: center;
+            font-family: 'Abel';
+        }
+
+        .clicktoread {
+            margin-top: 6%;
+            margin-left: 8%;
+            margin-right: 8%;
+            font-size: 14px;
+            text-align: center;
+            font-family: 'Abel';
+            color: rgb(220, 220, 220);
+        }
+        #profilePanel {
+            transition: all 0.3s ease-in-out;
+            width: 200px;
+            height: 80%;
+            background-color: rgba(255, 255, 255, 0.9);
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            box-sizing: border-box;
+            padding-top: 120px;
+            z-index: 997;
+            transform: translateX(-100%);
+        }
+
+        #goback {
+            background-image: url("./img/goback.png");
+            background-size: 60%;
+            background-position: center;
+            background-repeat: no-repeat;
+            width: 80%;
+            position: absolute;
+            padding-top: 3%;
+        }
+
+        p.profilecontent {
+            margin-left: 15px;
+        }
+
+        #historylist {
+            margin-top: 18%;
+            margin-left: 2.5%;
+            margin-right: 2.5%;
+        }
+        .historycol{
+
+          box-shadow: 4px 4px 3px rgba(220, 220, 220, 0.3);
+          height:80%;
+        }
+
+
+        .historyimg{
+          padding-top: 8%;
+           height:30%;
+        }
+        .historydate{
+          text-align: center;
+          padding-left: 30%;
+          padding-right: 20%;
+        }
+        .historytitle{
+          padding-top: 0px;
+          padding-left: 8%;
+          padding-right: 6%;
+        }
+        .history{
+          margin-bottom: 0px;
+          padding: 0px;
+
+        }
+
+        .historydate {
+            margin-left: 10%;
+            margin-right: 20%;
+        }
+        #searchresult{
+          margin-top: 22%;
+          margin-left: 4.5%;
+          margin-right: 2.5%;
+        }
+    </style>
+
+    <script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
+
+    <script>
+        window.addEventListener("load", function() {
+
+
+            ui.init();
+
+        });
+
+        var allhistory = [];
+
+
+        $(function() {
+
+            $("#searchbox").autocomplete({
+                minLength: 0,
+                source: allhistory,
+
+                // focus: function(event, selected) {
+                //     $("#searchresult").val(selected.item.value);
+                //     return false;
+                //
+                // },
+
+                select: function(event, selected) {
+                    $("#searchresult").html('<a href = "#contentpage">' + selected.item.value +":"+ selected.item.desc + "</a>");
+                }
+
+
+            });
+        });
+
+
+        $(document).on("pagecreate", "#pageone", function() {
+            $(document).on("swiperight", ".ui-content", function(event) {
+                $(":mobile-pagecontainer").pagecontainer("change", "#pagetwo")
+                ui.pageNumChecker();
+
+            });
+        });
+
+        $(document).on("pagecreate", "#pagetwo", function() {
+            $(document).on("swipeleft", ".ui-content", function(event) {
+                $(":mobile-pagecontainer").pagecontainer("change", "#pageone")
+                ui.pageNumChecker();
+            });
+        })
+
+
+
+
+        var ui = {
+            pageNum: 1,
+            lastPage: "",
+            currentPage: "",
+        };
+
+        ui.init = function() {
+
+            ui.topMenuStatus = false;
+            ui.collectState = false;
+
+            ui.topmenu = document.getElementById("topmenu");
+            ui.searchBtn = document.getElementById("searchbutton");
+            ui.footer = document.getElementById("footer");
+            ui.mywhichone = document.getElementById("mywhichone");
+            ui.profilePanel = document.getElementById("profilePanel");
+            ui.clickToRead = document.getElementsByClassName("clicktoread");
+            ui.historyone = document.getElementById("historyone");
+            ui.searchbox=document.getElementById("searchbox");
+
+            ui.title = document.getElementById("date");
+
+            ui.p1Titel = document.getElementById("p1title").innerHTML;
+            ui.p1Titel1 = document.getElementById("p1title1").innerHTML;
+
+
+
+            ui.pageNumChecker();
+
+            ui.footer.addEventListener("click", function() {
+                ui.chooseThis();
+
+
+            });
+
+            ui.searchBtn.addEventListener("click", function() {
+                $(":mobile-pagecontainer").pagecontainer("change", "#searchpage")
+                ui.pageNumChecker();
+            });
+
+            ui.topmenu.addEventListener("click", function() {
+
+                if (ui.pageNum >= 3) {
+                    ui.goBack();
+                } else {
+                    ui.topMenuStatus = !ui.topMenuStatus;
+                    ui.goToSliderPanel();
+                }
+
+            });
+            ui.mywhichone.addEventListener("click", function() {
+                $(":mobile-pagecontainer").pagecontainer("change", "#mywhichonepage");
+                ui.pageNumChecker();
+            });
+
+
+            ui.historyone.addEventListener("click", function() {
+                $(":mobile-pagecontainer").pagecontainer("change", "#contentpage");
+                ui.pageNumChecker();
+            });
+
+
+        };
+
+        ui.pageNumChecker = function() {
+            if (ui.currentPage !== '#contentpage') {
+              ui.lastPage = ui.currentPage;
+            }
+            // ui.lastPage = ui.currentPage === '#contentpage' ? ui.lastPage : ui.currentPage;
+
+            ui.currentPage = window.location.hash;
+
+
+            if (ui.currentPage + "" == "" || ui.currentPage == "#pageone") {
+                ui.title.innerHTML = "  03/27/2017";
+                ui.pageNum = 1;
+            } else if (ui.currentPage == "#pagetwo") {
+                ui.pageNum = 2;
+            } else if (ui.currentPage == "#searchpage") {
+                ui.pageNum = 3;
+            } else if (ui.currentPage == "#mywhichonepage") {
+                ui.pageNum = 4;
+            } else if (ui.currentPage == "#contentpage") {
+                ui.pageNum = 5;
+
+                  console.log(ui.lastPage);
+
+            }
+
+
+            ui.updatePage(ui.pageNum);
+        }
+
+        ui.updatePage = function(pageNum) {
+
+            //console.log(pageNum);
+
+            if (pageNum < 3) {
+                ui.topmenu.style.backgroundImage = "url('./img/wo-profile.png')";
+                ui.searchBtn.style.display = "block";
+                ui.footer.style.display = "block";
+                ui.profilePanel.style.display = "block";
+                ui.searchbox.style.display="none"
+                ui.title.innerHTML = "  03/27/2017";
+
+            } else if (pageNum == 3) {
+                ui.topmenu.style.backgroundImage = "url('./img/goback.png')";
+                ui.searchBtn.style.display = "none";
+                ui.footer.style.display = "none"
+                ui.profilePanel.style.display = "none";
+                ui.title.style.display = "none";
+
+                ui.searchbox.style.display="block"
+
+            } else if (pageNum == 4){
+              ui.topmenu.style.backgroundImage = "url('./img/goback.png')";
+              ui.searchBtn.style.display = "block";
+              ui.footer.style.display = "none"
+              ui.profilePanel.style.display = "none";
+              ui.searchbox.style.display="none"
+              ui.title.innerHTML = "My Which One";
+
+            } else if(pageNum == 5){
+              ui.topmenu.style.backgroundImage = "url('./img/goback.png')";
+              ui.searchBtn.style.display = "none";
+              ui.footer.style.display = "none"
+              ui.profilePanel.style.display = "none";
+              ui.searchbox.style.display="none"
+              ui.title.innerHTML = "  03/27/2017";
+
+            }
+        };
+
+        ui.goToSliderPanel = function() {
+
+
+            if (ui.topMenuStatus === true) {
+
+                profilePanel.style.transform = "translateX(0%)";
+
+            } else {
+                profilePanel.style.transform = "translateX(-100%)";
+            }
+
+
+        };
+
+        ui.goBack = function() {
+            $(":mobile-pagecontainer").pagecontainer("change", ui.lastPage);
+            ui.pageNumChecker();
+        };
+
+        // ui.goBack2 = function() {
+        //     $(":mobile-pagecontainer").pagecontainer("change", "#page");
+        //     ui.pageNumChecker();
+        // };
+
+
+        ui.chooseThis = function(state) {
+
+            ui.collectState = !ui.collectState;
+
+
+            if (ui.collectState === true) {
+                ui.footer.style.backgroundPosition = "center top";
+
+                ui.clickToRead[0].addEventListener("click", function() {
+                    $(":mobile-pagecontainer").pagecontainer("change", "#contentpage");
+                    ui.pageNumChecker();
+                });
+                ui.clickToRead[0].style.color = "rgb(244,136,32)";
+
+            } else {
+                ui.footer.style.backgroundPosition = "center bottom";
+                ui.clickToRead[0].style.color = "rgb(220,220,220)";
+            }
+
+
+
+            ui.pageNumChecker();
+
+            if (ui.pageNum = 1) {
+
+                var newobj = {
+                    "value": ui.p1Titel,
+                    "desc": ui.p1Titel1
+                };
+
+                allhistory.push(newobj);
+
+
+            } else if (ui.pageNum = 2) {
+
+                var p2Tite2 = document.getElementById("p2title").innerHTML;
+                var p2Titel2 = document.getElementById("p2title2").innerHTML;
+
+                var newobj = {
+                    "value": "p2Tite2",
+                    "desc": "p2Titel2"
+                };
+
+                allhistory.push(newobj);
+            }
+
+        };
+    </script>
+
+</head>
+
+<body>
+
+
+
+
+    <!-- slider panel -->
+    <div id="profilePanel">
+
+        <p class="profilecontent" id="mywhichone">My Which One</p>
+        <P class="profilecontent">Setting</p>
+
+    </div>
+
+
+    <!-- header -->
+    <div id="header" class="mom">
+
+        <div id="topmenu" class="child"></div>
+        <div id="date" class="child">
+            03/27/2017
+        </div>
+        <input autofocus="autofocus" id="searchbox" type="text" placeholder="Search ..">
+        <div id="searchbutton" class="child"></div>
+
+
+    </div>
+
+    <div id="footer" class="bar">
+
+    </div>
+
+
+    <!--  page two content-->
+    <div data-role="page" id="pageone" class="wopage">
+
+        <div data-role="main" class="ui-content">
+
+            <div class="p-content">
+
+
+                <div <div id="p1-pic" class="wo-pic"></div>
+
+                <div id="p1title" class="wo-title1">
+                    Olafur Eliasson
+                </div>
+
+                <div id="p1title1" class="wo-title2">
+                    Your glacial expectation with Gunther Vogt
+                </div>
+
+                <div class="clicktoread" id="readpageone">
+                    Read the full content
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Page one content -->
+    <div data-role="page" id="pagetwo" class="wo-page">
+
+        <div data-role="main" class="ui-content">
+
+            <div class="p-content">
+
+                <div id="p2-pic" class="wo-pic">
+                </div>
+
+                <div id="p2title" class="wo-title1">
+                    Dear Angelica
+                </div>
+                <div id="p2title2" class="wo-title2">
+                    How Oculus Reinvented VR Animation With a Little Help From Geena Davis
+                </div>
+                <div class="clicktoread" id="readpagetwo">
+                    Read the full content
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- search page -->
+    <div data-role="page" id="searchpage" class="wo-page">
+
+        <div data-role="main" class="ui-content">
+
+
+
+            <div id="searchresult"></div>
+        </div>
+
+    </div>
+
+    <!-- my whichone page -->
+    <div data-role="page" id="mywhichonepage" class="wo-page">
+        <div data-role="main" class="ui-content">
+
+
+            <div id = "historylist">
+              <table style="width:100%">
+                <tr class = "historycol" id = "historyone">
+                    <td class = "history"><img class = "historyimg" src="./img/history5.jpg"></td>
+                    <td class = "history"><div class = "historydate">6<br/>Mar</div></td>
+                    <td class = "history"><div class = "historytitle">Olafur Eliasson<br/>Your glacial expectation with Gunther Vogt and Olafur Eliasson</div></td>
+                </tr>
+                <tr class = "historycol">
+                    <td class = "history"><img class = "historyimg" src="./img/history2.jpg"></td>
+                    <td class = "history"><div class = "historydate">7<br/>Mar</div></td>
+                    <td class = "history"><div class = "historytitle">James TuRrell<br/> How James Turrell Knocked the Art World Off Its Feet</div></td>
+                </tr>
+                <tr class = "historycol">
+                    <td><img class = "historyimg" src="./img/history3.jpg"></td>
+                    <td><div class = "historydate">8<br/>Mar</div></td>
+                    <td><div class = "historytitle">James TuRrell<br/> How James Turrell Knocked the Art World Off Its Feet</div></td>
+                </tr>
+                <tr class = "historycol">
+                    <td><img class = "historyimg" src="./img/history4.jpg"></td>
+                    <td><div class = "historydate">9<br/>Mar</div></td>
+                    <td><div class = "historytitle">James TuRrell<br/> How James Turrell Knocked the Art World Off Its Feet</div></td>
+                </tr>
+                <tr class = "historycol">
+                    <td><img class = "historyimg" src="./img/history1.jpg"></td>
+                    <td><div class = "historydate">10<br/>Mar</div></td>
+                    <td><div class = "historytitle">James TuRrell<br/> How James Turrell Knocked the Art World Off Its Feet</div></td>
+                </tr>
+
+              </table>
+
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div data-role="page" id="contentpage" class="wo-page">
+        <div date-role="main" class="ui-content">
+            <div id="mycontent">
+
+
+              <p class="p-block" id="contentTitle">
+                Olafur Eliasson
+             </p>
+             <p class="p-block" id="contentDescription">
+                Your glacial expectation</br> Günther Vogt and Olafur Eliasson
+             </p>
+                <p class="p-block">
+                    Contemporary art
+                </p>
+                <p class="p-block">
+                  Your glacial expectation with Gunther Vogt and Olafur Eliasson
+
+                </p>
+                <p class="p-block">
+                  Ebeltoft, 2012
+                </p>
+
+                <p class="p-block">The construction of the surrounding landscape of Kvadrat Headquarters in Ebeltoft is designed by architect Günther Vogt and artist Olafur Eliasson, who have been collaborating on the project since 2008.</p>
+                <p class="p-block">The great permanent outdoor installation encompass five unique elliptical mirrors designed by Olafur Eliasson, resembling glacial basins, differing in form yet set in horizontal alignment and positioned amongst trees, shrubs and wildlife. The interplay of what is within and without; what is untamed wilderness and serene garden is also reflected in the conceptualisation of the landscape. On slight elevations in the broad meadows are small but dense gatherings of trees, clearly delineated in their oval form.</p>
+                <p class="p-block">April through October we offer guided tours in Your glacial expectation.
+
+                </p>
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+</body>
+
+</html>
